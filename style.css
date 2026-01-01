@@ -253,54 +253,81 @@ body {
   background: #388e3c;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 20px;
-    width: 95%;
+@media (max-width: 480px) {
+  /* layar utama */
+  .game-screen {
+    position: relative;
+    padding: 10px 0;
   }
 
+  /* container utama */
+  .container {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  /* judul */
   .title-small {
-    font-size: 32px;
-    letter-spacing: 3px;
+    font-size: 26px;
+    letter-spacing: 2px;
   }
 
   .title-big {
-    font-size: 26px;
-  }
-
-  .title-line {
-    width: 70%;
-  }
-
-  .btn {
-    width: 100%;
-    padding: 18px;
     font-size: 20px;
   }
 
-  .arena {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .card {
-    width: 100%;
-  }
-
-  #tugImage {
-    width: 220px;
-  }
-
-  .soal {
+  /* tombol menu */
+  .btn {
+    padding: 14px;
     font-size: 18px;
   }
 
+  /* arena */
+  .arena {
+    gap: 14px;
+  }
+
+  /* kartu kiri kanan */
+  .card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  /* gambar tarik tambang */
+  #tugImage {
+    width: 180px;
+  }
+
+  /* garis tengah */
+  .tug-wrapper::after {
+    height: 90px;
+  }
+
+  /* soal */
+  .soal {
+    font-size: 16px;
+  }
+
+  /* input pecahan */
+  .fraction input {
+    width: 46px;
+    height: 34px;
+    font-size: 18px;
+  }
+
+  /* operator */
   .op {
-    font-size: 28px;
+    font-size: 22px;
+  }
+
+  /* kalkulator */
+  .calculator {
+    gap: 8px;
   }
 
   .calculator button {
-    font-size: 18px;
-    padding: 10px;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 8px;
   }
 }
