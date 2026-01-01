@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+  <link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8" />
+    <title>Game Bilangan Pecahan</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        background: url("background.jpg") center / cover no-repeat;
+        font-family: "Poppins", sans-serif;
+        overflow: hidden;
+        color: white;
+      }
+
+      /* PAGE */
+      .page {
+        width: 100%;
+        height: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .active {
+        display: flex;
+      }
+
+      /* JUDUL */
+      .title {
+        font-family: "Montserrat", sans-serif;
+        font-size: 64px;
+        font-weight: 800;
+        margin-bottom: 35px;
+        text-transform: uppercase;
+      }
+
+      /* MENU BOX */
+      .container {
+        background: rgba(0, 0, 0, 0.55);
+        padding: 60px 80px;
+        border-radius: 20px;
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .btn {
+        width: 300px;
+        padding: 22px;
+        font-size: 26px;
+        font-weight: 600;
+        border: none;
+        border-radius: 14px;
+        cursor: pointer;
+      }
+
+      .btn-play {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .btn-setting {
+        background-color: #2196f3;
+        color: white;
+      }
+
+      /* OVERLAY */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .overlay.active {
+        display: flex;
+      }
+
+      .overlay.normal {
+        background: transparent;
+      }
+
+      /* TEXT */
+      .countdown {
+        font-size: 180px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 800;
+      }
+
+      .start-text {
+        font-size: 120px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 800;
+      }
+
+      /* CONFETTI */
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        top: -10px;
+        animation: fall linear forwards;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+
+      /* FOOTER SELALU TAMPIL */
+      .footer {
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        opacity: 0.85;
+        z-index: 1500;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- MENU -->
+    <div id="menu" class="page active">
+      <div class="container">
+      
+        <div class="title">
+          <div class="title-big">PERMAINAN</div>
+          <div class="title-big">BILANGAN PECAHAN</div>
+          <div class="title-line"></div>
+        </div>
+
+        <div class="buttons">
+          <button class="btn btn-play" onclick="startCountdown()">
+            ➕ Penjumlahan</button>
+          </button>
+          <button class="btn btn-setting">➖ Pengurangan</button>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- GAME PAGE -->
+    <div id="game" class="game-screen">
+      <div class="arena">
+        <!-- KIRI -->
+        <div class="card">
+          <div class="soal">
+            <div class="fraction">
+              <div>1</div>
+              <div class="line"></div>
+              <div>5</div>
+            </div>
+            <span class="op">+</span>
+            <div class="fraction">
+              <div>2</div>
+              <div class="line"></div>
+              <div>5</div>
+            </div>
+            <span class="op">=</span>
+            <div class="fraction">
+              <input readonly data-side="left" data-type="top" data-answer="3" />
+              <div class="line"></div>
+              <input readonly data-side="left" data-type="bottom" data-answer="5" />
+              <span class="result-icon"></span>
+            </div>
+          </div>
+
+          <div class="calculator" data-side="left">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+
+            <button class="btn-clear">C</button>
+            <button>0</button>
+            <button class="btn-go">Go</button>
+          </div>
+        </div>
+
+        <!-- TENGAH (TARIK TAMBANG) -->
+        <div class="tug-wrapper">
+          <img src="tariktambang.png" id="tugImage" />
+        </div>
+
+        <!-- KANAN -->
+        <div class="card">
+          <div class="soal">
+            <div class="fraction">
+              <div>3</div>
+              <div class="line"></div>
+              <div>6</div>
+            </div>
+            <span class="op">+</span>
+            <div class="fraction">
+              <div>2</div>
+              <div class="line"></div>
+              <div>6</div>
+            </div>
+            <span class="op">=</span>
+            <div class="fraction">
+              <input readonly data-side="right" data-type="top" data-answer="5" />
+              <div class="line"></div>
+              <input readonly data-side="right" data-type="bottom" data-answer="6" />
+              <span class="result-icon"></span>
+            </div>
+          </div>
+
+          <div class="calculator" data-side="right">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+
+            <button class="btn-clear">C</button>
+            <button>0</button>
+            <button class="btn-go">Go</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERLAY -->
+    <div id="overlay" class="overlay">
+      <div id="overlayText" class="countdown">3</div>
+    </div>
+
+    <!-- FOOTER (TIDAK IKUT HILANG) -->
+    <div class="footer">By Ariz Eka Pramudita © 2025</div>
+
+    <script>
+      // === BANK SOAL ===
+      const questions = [
+        { a: 1, b: 5, c: 2 },   // 1/5 + 2/5 = 3/5
+        { a: 2, b: 5, c: 1 },
+        { a: 3, b: 5, c: 1 },
+        { a: 2, b: 5, c: 2 },
+        { a: 4, b: 5, c: 1 },
+
+        { a: 1, b: 6, c: 2 },
+        { a: 3, b: 6, c: 2 },
+        { a: 2, b: 6, c: 3 },
+        { a: 4, b: 6, c: 1 },
+        { a: 5, b: 6, c: 1 },
+
+        { a: 1, b: 8, c: 3 },
+        { a: 2, b: 8, c: 4 },
+        { a: 3, b: 8, c: 1 },
+        { a: 5, b: 8, c: 2 },
+        { a: 6, b: 8, c: 1 },
+
+        { a: 1, b: 10, c: 4 },
+        { a: 3, b: 10, c: 2 },
+        { a: 5, b: 10, c: 3 },
+        { a: 2, b: 10, c: 6 },
+        { a: 4, b: 10, c: 5 }
+      ];
+
+      // SOAL AKTIF
+      let leftQuestion = null;
+      let rightQuestion = null;
+
+      //AMBIL SOAL ACAK ACAK
+      function getRandomQuestion(except = null) {
+        let q;
+        do {
+          q = questions[Math.floor(Math.random() * questions.length)];
+        } while (q === except);
+        return q;
+      }
+
+      // RONDE BARU
+      function loadNewRound() {
+        leftQuestion = getRandomQuestion();
+        rightQuestion = getRandomQuestion(leftQuestion);
+
+        renderQuestion("left", leftQuestion);
+        renderQuestion("right", rightQuestion);
+
+        activeInput.left = null;
+        activeInput.right = null;
+      }
+
+      // JAWAB BENAR SATU SISI SAJA
+      function loadSingleQuestion(side) {
+        const newQuestion = getRandomQuestion(
+          side === "left" ? rightQuestion : leftQuestion
+        );
+
+        if (side === "left") {
+          leftQuestion = newQuestion;
+        } else {
+          rightQuestion = newQuestion;
+        }
+
+        renderQuestion(side, newQuestion);
+
+        // reset input aktif sisi itu saja
+        activeInput[side] = null;
+      }
+
+      // RENDER KE HTML
+      function renderQuestion(side, q) {
+        const card = document
+          .querySelector(`.calculator[data-side="${side}"]`)
+          .closest(".card");
+
+        const fracs = card.querySelectorAll(".fraction");
+
+        // Pecahan Pertama
+        fracs[0].children[0].innerText = q.a;
+        fracs[0].children[2].innerText = q.b;
+
+        //Pecahan kedua
+        fracs[1].children[0].innerText = q.c;
+        fracs[1].children[2].innerText = q.b;
+
+        // Jawaban
+        const inputs = fracs[2].querySelectorAll("input");
+        inputs[0].dataset.answer = q.a + q.c;
+        inputs[1].dataset.answer = q.b;
+
+        inputs.forEach(i => i.value = "");
+      }
+
+      let count = 3;
+      
+      // === MESIN TARIK TAMBANG (GLOBAL) ===
+      let tugPosition = 0;
+      const step = 20;
+      const maxMove = 60;
+      let tugImage = null;
+
+      function moveTug(side) {
+        if (!tugImage) {
+          tugImage = document.getElementById("tugImage");
+        }
+
+        if (side === "left") {
+          tugPosition = Math.max(tugPosition - step, -maxMove);
+        } else if (side === "right") {
+          tugPosition = Math.min(tugPosition + step, maxMove);
+        }
+
+        tugImage.style.transform = `translateX(${tugPosition}px)`;
+      }
+
+      function startCountdown() {
+        const overlay = document.getElementById("overlay");
+        const text = document.getElementById("overlayText");
+        const menu = document.getElementById("menu");
+        const game = document.getElementById("game");
+
+        overlay.classList.add("active");
+        text.className = "countdown";
+        text.innerText = count;
+
+        const interval = setInterval(() => {
+          count--;
+          if (count > 0) {
+            text.innerText = count;
+          } else {
+            clearInterval(interval);
+
+            // SEMBUNYIKAN MENU
+            menu.classList.remove("active");
+
+            // TAMPILKAN MULAI
+            overlay.classList.add("normal");
+            text.className = "start-text";
+            text.innerText = "MULAI";
+            
+            // CONFETTI
+            launchConfetti();
+
+            setTimeout(() => {
+              overlay.classList.remove("active");
+              game.classList.add("active");
+
+              loadNewRound(); // ⬅️ WAJIB
+            }, 1500);
+          }
+        }, 1500);
+      }
+
+      function launchConfetti() {
+        for (let i = 0; i < 120; i++) {
+          const confetti = document.createElement("div");
+          confetti.className = "confetti";
+          confetti.style.left = Math.random() * 100 + "vw";
+          confetti.style.backgroundColor = `hsl(${
+            Math.random() * 360
+          }, 100%, 50%)`;
+          confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
+          document.body.appendChild(confetti);
+
+          setTimeout(() => confetti.remove(), 4000);
+        }
+      }
+            // === SCRIPT KALKULATOR ===
+            let activeInput = {
+              left: null,
+              right: null
+            };
+
+            // PILIH INPUT SESUAI SISI
+            document.querySelectorAll(".fraction input").forEach(input => {
+              input.addEventListener("click", () => {
+                const side = input.dataset.side;
+
+                activeInput[side] = input;
+
+                document
+                  .querySelectorAll(`.fraction input[data-side="${side}"]`)
+                  .forEach(i => i.classList.remove("active-input"));
+
+                input.classList.add("active-input");
+              });
+            });
+
+            // KALKULATOR PER SISI
+            document.querySelectorAll(".calculator").forEach(calculator => {
+              const side = calculator.dataset.side;
+
+              calculator.querySelectorAll("button").forEach(btn => {
+                btn.addEventListener("click", () => {
+                  const input = activeInput[side];
+                  if (!input) return;
+
+                  const value = btn.innerText;
+
+                  // CLEAR
+                  if (value === "C") {
+                    input.value = "";
+                    return;
+                  }
+
+                  // GO
+                  if (value === "Go") {
+                    const fraction = calculator
+                      .closest(".card")
+                      .querySelector(".fraction:last-child");
+
+                    const inputs = fraction.querySelectorAll("input");
+
+                    let benar = true;
+                    inputs.forEach(i => {
+                      if (i.value === "" || Number(i.value) !== Number(i.dataset.answer)) {
+                        benar = false;
+                      }
+                    });
+
+                    if (benar) {
+                    moveTug(side);
+
+                    setTimeout(() => {
+                      loadSingleQuestion(side);
+                    }, 400);
+                  }
+
+                    return;
+                  }
+
+                  // ANGKA
+                  if (input.value.length >= 2) return;
+                  input.value += value;
+                });
+              });
+            });
+        </script> 
+    </body>
+</html>
