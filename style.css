@@ -1,3 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 /* GAME SCREEN */
 .game-screen {
   position: fixed;
@@ -243,4 +251,56 @@
 
 .btn-go:hover {
   background: #388e3c;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .title-small {
+    font-size: 32px;
+    letter-spacing: 3px;
+  }
+
+  .title-big {
+    font-size: 26px;
+  }
+
+  .title-line {
+    width: 70%;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 18px;
+    font-size: 20px;
+  }
+
+  .arena {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  #tugImage {
+    width: 220px;
+  }
+
+  .soal {
+    font-size: 18px;
+  }
+
+  .op {
+    font-size: 28px;
+  }
+
+  .calculator button {
+    font-size: 18px;
+    padding: 10px;
+  }
 }
