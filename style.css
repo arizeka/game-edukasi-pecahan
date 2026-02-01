@@ -1,0 +1,257 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Latar Belakang Gradasi */
+.splash-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #48c9b0 0%, #27ae60 100%);
+  color: white;
+  text-align: center;
+}
+
+/* Kontainer Konten */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Lingkaran Logo */
+.logo-circle {
+  background-color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.logo-daun img {
+  width: 45px; /* Sesuaikan ukuran ikon daun */
+}
+
+/* Nama Brand */
+.brand-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+/* Status Loading */
+.loading-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Animasi Spinner (icon putar) */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Link Bawah */
+.back-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.back-link:hover {
+  color: white;
+}
+
+/* Bar Progress */
+.progress-bar {
+  width: 150px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 20px auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: white;
+  transition: width 3s linear;
+}
+/* --- STYLING HALAMAN UTAMA (GAMBAR 2) --- */
+#main-content {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 1s ease-out;
+  background: url("background-forest.png") bottom center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+#main-content.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Navbar Simple Style */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  border-radius: 50px;
+  margin: 20px auto;
+  width: 70%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.logo-brand {
+  display: flex;
+  align-items: center;
+  color: #27ae60;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 50px;
+}
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #555;
+  font-weight: 500;
+  padding: 5px 15px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+.nav-links li i {
+  font-size: 1.2rem;
+}
+.nav-links li.active {
+  color: #27ae60;
+  background: #e8f6ef;
+}
+
+.btn-quiz {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-top: 100px;
+  padding: 0 20px;
+}
+.hero h1 {
+  font-size: 3.5rem;
+  color: #333;
+  line-height: 1.2;
+}
+.highlight {
+  background-color: #27ae60;
+  color: white;
+  padding: 0 15px;
+  border-radius: 10px;
+}
+.hero p {
+  color: #666;
+  margin: 20px 0;
+  font-size: 1.1rem;
+}
+
+.hero-btns {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.btn-primary {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.btn-secondary {
+  background: white;
+  color: #27ae60;
+  border: 2px solid #27ae60;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+/* Cards Section */
+.features {
+  padding: 60px 8%;
+  text-align: center;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}

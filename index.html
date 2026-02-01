@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Edukasi Matematika</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="loading-screen" class="splash-container">
+      <div class="splash-content">
+        <div class="logo-circle">
+          <img src="logo-daun.png" alt="Logo" />
+        </div>
+
+        <h1 class="brand-name">EduMathriz</h1>
+
+        <div class="loading-status">
+          <span class="spinner"></span>
+          <p>Memuat halaman...</p>
+        </div>
+
+        <a href="#" class="back-link">Menuju ke Beranda...</a>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <main id="main-content" class="hidden">
+      <nav class="navbar">
+        <div class="logo-brand">
+          <img src="logo-daun.png" /> <span>EduMathriz</span>
+        </div>
+        <ul class="nav-links">
+          <li class="active"><i class="bx bx-home-alt"></i> Beranda</li>
+          <li><i class="bx bx-book"></i> Materi</li>
+          <li><i class="bx bx-joystick"></i> Permainan</li>
+          <li><i class="bx bx-user"></i> Profil</li>
+        </ul>
+        <button class="btn-quiz">Coba Quiz</button>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-text">
+          <h1>
+            Sampah Aja Diedukasi, <br />
+            <span class="highlight">Kamu Gimana?</span>
+          </h1>
+          <p>
+            Belajar memilah, mengolah, dan mengurangi sampah dengan cara yang
+            mudah dan menyenangkan.
+          </p>
+          <div class="hero-btns">
+            <button class="btn-primary">Get Started</button>
+            <button class="btn-secondary">Learn More</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <h2>Kenapa Ada Website Ini?</h2>
+        <div class="feature-grid">
+          <div class="card">
+            <div class="icon">🗑️</div>
+            <h3>Masalah Sampah</h3>
+            <p>
+              Banyak sampah di mana-mana. Mari belajar mengelola dengan benar.
+            </p>
+          </div>
+          <div class="card">
+            <div class="icon">📖</div>
+            <h3>Edukasi Mudah</h3>
+            <p>Belajar memilah sampah jadi lebih gampang dan seru.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
